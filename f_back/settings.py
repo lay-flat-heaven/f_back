@@ -159,10 +159,10 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
 )
 
-CLOTH_UPLOAD = (str(BASE_DIR)+'\\get_image\\PF_AFN\\dataset\\real_clothes\\')
+CLOTH_UPLOAD = (str(BASE_DIR)+'/get_image/PF_AFN/dataset/real_clothes/')
 
-PEOPLE_UPLOAD = (str(BASE_DIR)+'\\get_image\\PF_AFN\\dataset\\real_img\\')
+PEOPLE_UPLOAD = (str(BASE_DIR)+'/get_image/PF_AFN/dataset/real_img/')
 
-MASK_PATH = (str(BASE_DIR)+'\\get_image\\PF_AFN\\dataset\\real_edge\\')
+MASK_PATH = (str(BASE_DIR)+'/get_image/PF_AFN/dataset/real_edge/')
 
-RESULT_PATH = (str(BASE_DIR)+'\\get_image\\PF_AFN\\results\\real\\PFAFN\\')
+RESULT_PATH = (str(BASE_DIR)+'/get_image/PF_AFN/results/real/PFAFN/')
