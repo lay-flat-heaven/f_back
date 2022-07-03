@@ -61,7 +61,7 @@ def getImage(request):
             }
             return JsonResponse(data)
         else:
-            return HttpResponse(str('Fail to generate Img'))
+            return HttpResponse(str('Fail To Generate Img'))
 
 def getPath(request):
     if request.method == 'GET':
