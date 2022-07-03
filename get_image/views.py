@@ -48,7 +48,7 @@ def getImage(request):
             for chunk in img_2.chunks():
                 fp.write(chunk) 
         
-        rc = subprocess.call(["python", "test.py"], cwd=("/home/lzn/futurama/f_back" + "/get_image/PF_AFN/"))
+        rc = subprocess.call(["python", "test.py"], cwd=("/home/lzn/futurama/f_back"+"/get_image/PF_AFN/"))
         # if rc == 0:
         try:
                 result_img = cv2.imread(settings.RESULT_PATH+os.listdir(settings.RESULT_PATH)[0])
