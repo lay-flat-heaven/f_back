@@ -52,7 +52,7 @@ def getImage(request):
         # if rc == 0:
         try:
             if os.listdir(settings.RESULT_PATH) == []:
-                return HttpResponse("No result!")
+                return HttpResponse(str("No result!" + str(rc)))
             result_img = cv2.imread(settings.RESULT_PATH + os.listdir(settings.RESULT_PATH)[0])
         except FileNotFoundError:
             return HttpResponse(status_code=400, content=str('Generate Failed' + str(rc)))
