@@ -48,12 +48,14 @@ def getImage(request):
             for chunk in img_2.chunks():
                 fp.write(chunk) 
         
-        rc = subprocess.call(["python", "test.py"], cwd=("/home/lzn/futurama/f_back"+"/get_image/PF_AFN/"))
+        rc = subprocess.call(["python", "test.py"], cwd=("/home/lzn/futurama/f_back/get_image/PF_AFN/"))
         # if rc == 0:
         try:
-                result_img = cv2.imread(settings.RESULT_PATH+os.listdir(settings.RESULT_PATH)[0])
+            if os.listdir(settings.RESULT_PATH) == []:
+                return HttpResponse("No result!")
+            result_img = cv2.imread(settings.RESULT_PATH + os.listdir(settings.RESULT_PATH)[0])
         except FileNotFoundError:
-            return HttpResponse(status_code=400, content=str('Generate Failed'))
+            return HttpResponse(status_code=400, content=str('Generate Failed' + str(rc)))
         img_decoded=base64.b64encode(cv2.imencode('.jpg',result_img)[1]).decode()
         data = {
             'file_name': os.listdir(settings.RESULT_PATH)[0],
