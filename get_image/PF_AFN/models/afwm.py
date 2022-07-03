@@ -6,7 +6,7 @@ from .correlation import correlation
 def apply_offset(offset):
 
     sizes = list(offset.size()[2:])
-    grid_list = torch.meshgrid([torch.arange(size, device=offset.device) for size in sizes],indexing="ij")
+    grid_list = torch.meshgrid([torch.arange(size, device=offset.device) for size in sizes])
     grid_list = reversed(grid_list)
 
     grid_list = [grid.float().unsqueeze(0) + offset[:, dim, ...]
