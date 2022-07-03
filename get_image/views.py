@@ -21,7 +21,7 @@ def apiTest(request):
 def getImage(request):
     if request.method  == 'POST':
 
-        return HttpResponse("Connected!")
+        # return HttpResponse("Connected!")
         # 先清空对应路径
         utils.clean_files()
         img_1 = request.FILES.get('img_1')
