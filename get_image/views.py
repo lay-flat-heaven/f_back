@@ -24,7 +24,7 @@ def getImage(request):
         # return HttpResponse("Connected!")
         # 先清空对应路径
         utils.clean_files()
-        img_1 = request.FILES.get('img_2')
+        img_1 = request.FILES.get('img_1')
         img_name = img_1.name
         mobile = os.path.splitext(img_name)[0]
         ext = os.path.splitext(img_name)[1]
@@ -37,7 +37,7 @@ def getImage(request):
                 fp.write(chunk)
         
         
-        img_2 = request.FILES.get('img_1')
+        img_2 = request.FILES.get('img_2')
         img_name = img_2.name
         mobile = '1'
         ext = os.path.splitext(img_name)[1]
@@ -49,22 +49,21 @@ def getImage(request):
                 fp.write(chunk) 
         
         output, success = utils.system_call(['python', 'test.py'], root="/home/lzn/futurama/f_back/get_image/PF_AFN/")
-        rc = subprocess.call(["python", "test.py"], cwd=("/home/lzn/futurama/f_back/get_image/PF_AFN/"))
-        # if rc == 0:
-        try:
-            if os.listdir(settings.RESULT_PATH) == []:
-                return HttpResponse(str("No result!" + str(output)))
-            result_img = cv2.imread(settings.RESULT_PATH + os.listdir(settings.RESULT_PATH)[0])
-        except FileNotFoundError:
-            return HttpResponse(status_code=400, content=str('Generate Failed' + str(output)))
-        img_decoded=base64.b64encode(cv2.imencode('.jpg',result_img)[1]).decode()
-        data = {
-            'file_name': os.listdir(settings.RESULT_PATH)[0],
-            'file_content': img_decoded,
-        }
-        return JsonResponse(data)
-        # else:
-            # return HttpResponse(str('Fail To Generate Img'))
+        if success == 0:
+            try:
+                if os.listdir(settings.RESULT_PATH) == []:
+                    return HttpResponse(str("No result!" + str(output)))
+                result_img = cv2.imread(settings.RESULT_PATH + os.listdir(settings.RESULT_PATH)[0])
+            except FileNotFoundError:
+                return HttpResponse(status_code=400, content=str('Generate Failed' + str(output)))
+            img_decoded=base64.b64encode(cv2.imencode('.jpg',result_img)[1]).decode()
+            data = {
+                'file_name': os.listdir(settings.RESULT_PATH)[0],
+                'file_content': img_decoded,
+            }
+            return JsonResponse(data)
+        else:
+            return HttpResponse(str('Fail To Generate Img'))
 
 def getPath(request):
     if request.method == 'GET':
