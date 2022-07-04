@@ -21,13 +21,13 @@ class UnetSkipConnectionBlock(nn.Module):
             upnorm = norm_layer(outer_nc)
 
         if outermost:
-            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
+            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
             upconv = nn.Conv2d(inner_nc * 2, outer_nc, kernel_size=(3,3), stride=(1,1), padding=1, bias=use_bias)
             down = [downconv]
             up = [uprelu, upsample, upconv]
             model = down + [submodule] + up
         elif innermost:
-            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
+            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
             upconv = nn.Conv2d(inner_nc, outer_nc, kernel_size=(3,3), stride=(1,1), padding=1, bias=use_bias)
             down = [downrelu, downconv]
             if norm_layer == None:
@@ -36,7 +36,7 @@ class UnetSkipConnectionBlock(nn.Module):
                 up = [uprelu, upsample, upconv, upnorm]
             model = down + up
         else:
-            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
+            upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
             upconv = nn.Conv2d(inner_nc*2, outer_nc, kernel_size=(3,3), stride=(1,1), padding=1, bias=use_bias)
             if norm_layer == None:
                 down = [downrelu, downconv]
