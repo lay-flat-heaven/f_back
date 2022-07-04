@@ -24,7 +24,7 @@ def getImage(request):
         # return HttpResponse("Connected!")
         # 先清空对应路径
         utils.clean_files()
-        img_1 = request.FILES.get('img_1')
+        img_1 = request.FILES.get('img_2')
         img_name = img_1.name
         mobile = os.path.splitext(img_name)[0]
         ext = os.path.splitext(img_name)[1]
@@ -37,7 +37,7 @@ def getImage(request):
                 fp.write(chunk)
         
         
-        img_2 = request.FILES.get('img_2')
+        img_2 = request.FILES.get('img_1')
         img_name = img_2.name
         mobile = '1'
         ext = os.path.splitext(img_name)[1]
